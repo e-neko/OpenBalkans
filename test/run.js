@@ -3,28 +3,43 @@
 
 const fs = require('fs')
 
-function runTests(a) {
+const Balkans = [
+    { title: 'JavaScript', b: require('../balkans') },
+    { title: 'Node.js crypto', b: require('../nodejs_crypto') },
+]
+
+async function runTests(balkans, a) {
     const tests = require('./' + a)
-    for (let b in tests) {
+    for (const b in tests) {
         if (!b.startsWith('test') || typeof tests[b] != 'function')
             continue
 
         console.log(`\t* ${b}`)
-        tests[b]()
+        await tests[b](balkans)
     }
 }
 
-function run() {
+async function runSuite(balkans) {
     const files = fs.readdirSync(__dirname, { encoding: 'utf8' })
-    for (let a of files) {
+    for (const a of files) {
         if (!a.startsWith('test_') || !a.endsWith('.js'))
             continue
 
         console.log(`* ${a.substr(0, a.length - 3)}`)
-        runTests(a)
+        await runTests(balkans, a)
+    }
+}
+
+async function run() {
+    for (const { title, b } of Balkans) {
+        console.log(`--- ${title} ---`)
+        await runSuite(b)
     }
 }
 
 if (require.main === module) {
+    if (typeof TextEncoder == 'undefined') // node.js < 11
+        global.TextEncoder = require('util').TextEncoder
+
     run()
 }

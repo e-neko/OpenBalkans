@@ -1,6 +1,13 @@
 {
-  "name": "openbalkans",
+  "name": "balkans",
+  "version": "0.1.0",
   "description": "Internet Balkanization Appliance",
+  "files": [
+    "balkans",
+    "client",
+    "nodejs_crypto"
+  ],
+  "main": "balkans/index.js",
   "repository": "git@github.com:mvasilkov/OpenBalkans.git",
   "author": "Mark Vasilkov (https://github.com/mvasilkov)",
   "license": "MIT",
@@ -9,14 +16,18 @@
   },
   "dependencies": {
     "base-x": "^3.0.5",
-    "bson": "^4.0.1",
-    "jsonwebtoken": "^8.5.0",
+    "cwb": "*",
+    "elliptic": "^6.4.1",
+    "fast-sha256": "^1.1.0",
+    "jsonwebtoken": "^8.5.1",
     "pem-file": "^1.0.1",
     "scrypt-async": "^2.0.1"
   },
   "devDependencies": {
-    "prompts": "^2.0.3",
-    "systematize": "^3.2.4",
-    "yargs": "^13.2.1"
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "babel-loader": "^8.0.6",
+    "jwa-purejs": "^1.0.0",
+    "systematize": "^3.3.0"
   }
 }
